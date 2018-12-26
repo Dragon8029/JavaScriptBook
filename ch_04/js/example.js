@@ -1,5 +1,5 @@
 var table = 3;                  // Unit of table   
-var ooperator = 'addition';     // Type of calculation (defaults to addition)
+var operator = 'addition';     // Type of calculation (defaults to addition)
 var i = 1;                      // Set counter to 1
 var msg = '';                   // Message
 
