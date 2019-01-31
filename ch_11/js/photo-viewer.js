@@ -31,7 +31,7 @@ $(document).on('click', '.thumb', function(e){ // When a thumb is clicked on
     $(this).addClass('active'); // Add active to clicked thumb
 
     if (cache.hasOwnProperty(src)) { // If cache contains this image
-        if (cach[src].isLoading === false) { // And if isLoading is fals
+        if (cache[src].isLoading === false) { // And if isLoading is fals
             crossfade(cache[src].$img); // Call crossfade() function
         }
     } else { // Otherwise it is not in cache
