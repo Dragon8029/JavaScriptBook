@@ -1,5 +1,5 @@
 (function() { 
-    var $imgs = $('#galler img'); // Store all images
+    var $imgs = $('#gallery img'); // Store all images
     var $buttons = $('#buttons'); // Store buttons element
     var tagged = {}; // Create tagged object
 
@@ -37,7 +37,7 @@
                 $(this) // The button clicked on
                     .addClass('active') // Make clicked item active
                     .siblings() // Get its siblings
-                    .removeCalss('active'); // Remove active from them
+                    .removeClass('active'); // Remove active from them
                 $imgs // With all of the images
                     .hide() // Hide them
                     .filter(tagged[tagName]) // Find ones with this tag
