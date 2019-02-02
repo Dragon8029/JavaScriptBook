@@ -30,7 +30,7 @@ $(function() {
 
     // LOOP THROUGH NEW ARRAY AND ADD MATCHING PEOPLE TO THE RESULTS TABLE
     var $tableBody = $('<tbody></tbody>'); // New content jQuery
-    for (var i = 0; i < SpeechRecognitionResultList.length; i++) { // Loop through matches
+    for (var i = 0; i < results.length; i++) { // Loop through matches
         var person = results[i]; // Store current person
         var $row = $('<tr></tr>'); // Create a row for them
         $row.append($('<td></td>').text(person.name)); // Add their name
