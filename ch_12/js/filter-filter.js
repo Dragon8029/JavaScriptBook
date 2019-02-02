@@ -20,6 +20,14 @@ $(function() {
     ];
     // FILTERING CODE GOES HERE - CREATES A NEW ARRAY CALLED results
 
+    // THE FUNCTION ACTS AS A FILTER
+    function priceRange(person) { // Declare priceRange()
+        return (person.rate >= 65) && (person.rate <= 90); // In range returns true
+    }; 
+    // FILTER THE PEOPLE ARRAY & ADD MATCHES TO THE RESULTS ARRAY
+    var results = []; // Array for matching people
+    results = people.filter(priceRange);
+
     // LOOP THROUGH NEW ARRAY AND ADD MATCHING PEOPLE TO THE RESULTS TABLE
     var $tableBody = $('<tbody></tbody>'); // New content jQuery
     for (var i = 0; i < SpeechRecognitionResultList.length; i++) { // Loop through matches
