@@ -1,6 +1,23 @@
 $(function() {
     // DATA ABOUT PEOPLE GOES HERE 
-
+    var people = [
+        {
+            name: 'Casey',
+            rate: 60
+        },
+        {
+            name: 'Camille',
+            rate: 80
+        },
+        {
+            name: 'Gordon',
+            rate: 75
+        },
+        {
+            name: 'Nigel', 
+            rate: 120
+        }
+    ];
     // FILTERING CODE GOES HERE - CREATES A NEW ARRAY CALLED results
 
     // LOOP THROUGH NEW ARRAY AND ADD MATCHING PEOPLE TO THE RESULTS TABLE
