@@ -43,5 +43,24 @@
     }); // End event handler
     
     // Function called above are here
+    function validateRequired(el) {
+        if (isRequired(el)) { // Is this element required
+            var valid = !isEmpty(el); // Is value not empty (true/false)
+            if (!valid) { // If valid variable holds false
+                setErrorMessage(el, 'Field is required'); // Set the error message
+            }
+            return valid; // Return valid variable (true/false)
+        }
+        return true; // If not required, all is okay
+    }
+
+    function isRequired(el) {
+        return ((typeof el.required === 'boolean') && el.required) || (typeof el.required === 'string');
+    }
+
+    function isEmpty(el) {
+        return !el.value || el.value === el.placeholder;
+    }
+    
 
 }()); //End of IIFE
