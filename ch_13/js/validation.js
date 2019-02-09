@@ -42,7 +42,7 @@
         }
     }); // End event handler
     
-    // Function called above are here
+    // Functions called above are here
     function validateRequired(el) {
         if (isRequired(el)) { // Is this element required
             var valid = !isEmpty(el); // Is value not empty (true/false)
@@ -61,6 +61,89 @@
     function isEmpty(el) {
         return !el.value || el.value === el.placeholder;
     }
-    
+
+    function setErrorMessage(el, message) {
+        $(el).data('errorMessage', message); // Store error message with element
+    }
+
+    function showErrorMessage(el) {
+        var $el = $(el); // Find element with the error
+        var $errorContainer = $el.siblings('.error'); // Does it have errors already
+
+        if (!$errorContainer.length) { // If no errors found
+            // Creat a <span> to hold the error and add it after the element with the error
+            $errorContainer = $('<span class="error"></span>').insertAfter($el);
+        }
+        $errorContainer.text($(el).data('errorMessage')); // Add error message
+    }
+
+    function validateTypes(el) {
+        if (!el.value) return true; // If element has no value, return true
+        // Otherwise get the value from .data()
+        var type = $(el).data('type') || el.getAttribute('type'); // or get the type of input
+        if (typeof validateType[type] === 'function') { // Is type a method of validate object? 
+            return validateType[type](el); // If yes, check if the value validates
+        } else { // If not
+            return true; // Return true as it cannot be tested
+        }
+    }
+
+    var validateType = {
+        email: function(el) {
+            // Check email adress
+            var valid = /[^@]+@[^@]+/.test(el.value); // Store result of test in valid
+            if (!valid) { // If the value of valid is not true
+                setErrorMessage(el, 'Please enter a valid email'); // Set error message
+            }
+            return valid; // Return the valid variable
+        }, 
+        number: function(el) {
+            // Check it is a number
+            var valid = /^\d+$/.test(el.value); 
+            if (!valid) { 
+                setErrorMessage(el, 'Please enter a valid number');
+            }
+            return valid; 
+        }, 
+        date: function(el) {
+            // Check date format
+            var valid = /^(\d{2}\/\d{2}\/\d{4})|(\d{4}-\d{2}-\d{2})$/.test(el.value);
+            if (!valid) {
+                setErrorMessage(el, 'Please enter a valid date'); 
+            } 
+            return valid;
+        }
+    }
+
+    function validateBio() {
+        var bio = dcoument.getElementById('bio'); // Store ref to bio text area
+        var valid = bio.value.length <= 140; // Is bio <= 140 characters
+        if (!valid) { // If not, set an error message
+            setErrorMessage(bio, 'Your bio should not exceed 140 characters'); 
+        }
+        return valid; // Return Boolean value
+    }
+
+    function validatePassword() { 
+        var password = document.getElementById('password'); // Store ref to element
+        var valid = password.value.length >= 8; // Is its value >= 8 chars
+        if (!valid) { // If not, set error msg
+            setErrorMessage(password, 'Password must be at least 8 characters'); 
+        }
+        return valid; // Return true / false
+    }
+
+    function validateParentsConsent() {
+        var parentsConsent = document.getElementById('parents-consent'); 
+        var consentContainer = document.getElementById('consent-container');
+        var valid = true; // Variable: valid set to true
+        if (consentContainer.className.indexOf('hide') === -1) { // If checkbox    shown
+            valid = parentsConsent.checked; // Update valid: is it checked/not
+            if (!valid) { // If not, set the error message
+                setErrorMessage(parentsConsent, 'You need your parents\' consent'); 
+            }
+        }
+        return valid; // Return whether valid or not
+    }
 
 }()); //End of IIFE
