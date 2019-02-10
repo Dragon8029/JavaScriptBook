@@ -121,23 +121,28 @@
         return valid; // Return true / false
     }
 
-
-
-
-
     function setErrorMessage(el, message) {
         $(el).data('errorMessage', message); // Store error message with element
     }
 
+    function getErrorMessage(el) {
+        return $(el).data('errorMessage') || el.title; // Get error message or title of element
+    }
+
     function showErrorMessage(el) {
         var $el = $(el); // Find element with the error
-        var $errorContainer = $el.siblings('.error'); // Does it have errors already
+        var errorContainer = $el.siblings('.error.message'); // Does it have errors already
 
-        if (!$errorContainer.length) { // If no errors found
+        if (!errorContainer.length) { // If no errors found
             // Creat a <span> to hold the error and add it after the element with the error
-            $errorContainer = $('<span class="error"></span>').insertAfter($el);
+            errorContainer = $('<span class="error message"></span>').insertAfter($el);
         }
-        $errorContainer.text($(el).data('errorMessage')); // Add error message
+        errorContainer.text(getErrorMessage(el)) // Add error message
+    }
+
+    function removeErrorMessage(el) {
+        var errorContainer = $(el).siblings('.error.message'); // Get the sibling of this form control used to hold the error message
+        errorContainer.remove(); // Remove the element that contains the error message
     }
 
     
