@@ -8,7 +8,7 @@
         var isFormValid; // isFormValid: checks entire form
 
         // PERFORM GENERIC CHECKS (calls functions outside the event handler)
-        for (var i = 0, l = (elements.length - 1); i < l; i++) {
+        for (var i = 0, l = (elements.length - l); i < l; i++) {
             // Next line calls validateRequired() see p606 & validateTypes() p610
             isValid = validateRequired(elements[i]) && validateTypes(elements[i]);
             if (!isValid) { // If it does not pass these two tests
@@ -27,7 +27,36 @@
             removeErrorMessage(document.getElementById('bio')); // Remove error
         } // two more functions follow here (see p614-p617)
 
-        
+        // password (you could cache password input variable here)
+        if (!validatePassword()) { // Call validatePassword(), and if not valid
+            showErrorMessage(document.getElementById('password')); // Show error message
+            valid.password = false; // Update the valid object - this element is not valid
+        } else { // Otherwise remove error message
+            removeErrorMessage(docuement.getElementById('password'));
+        }
+
+        // Parental consent (you could cache parent-consent in variable here)
+        if (!validateParentsConsent()) { // Call validateParentalConsent(), and if not valid
+            showErrorMessage(document.getElementById('parents-consent')); // Show error messaget
+            valid.parentsConsent = false; // Update the valid object - this is not valid
+        } else {// Otherwise remove error message
+            removeErrorMessage(document.getElementById('parents-consent'));
+        }
+
+        // DID IT PASS / CAN IT SUBMIT THE FORM?
+        // Loop through valid object, if ther are errors set isFormValid to false
+        for (var field in valid) { // Check properties of the valid object
+            if (!valid[field]) { // If it is not valid
+                isFormValid = false; // Set isFormValid variable to false
+                break; // Stop the for loop, error was found
+            } // Otherwise
+            isFormValid = true; // The form is valid and OK to submit
+        }
+        // If the form did not validate, prevent it being submitted
+        if (!isFormValid) { // If isFormValid is not true
+            e.preventDefault(); // Prevent the form being submitted
+        }
+
     }); // End event handler
     
     // Functions called above are here
@@ -133,18 +162,6 @@
         }
         return valid; // Return whether valid or not
     }
-    // DID IT PASS / CAN IT SUBMIT THE FORM?
-        // Loop through valid object, if ther are errors set isFormValid to false
-        for (var field in valid) { // Check properties of the valid object
-            if (!valid[field]) { // If it is not valid
-                isFormValid = false; // Set isFormValid variable to false
-                break; // Stop the for loop, error was found
-            } // Otherwise
-            isFormValid = true; // The form is valid and OK to submit
-        }
-        // If the form did not validate, prevent it being submitted
-        if (!isFormValid) { // If isFormValid is not true
-            e.preventDefault(); // Prevent the form being submitted
-        }
+    
 
 }()); //End of IIFE
