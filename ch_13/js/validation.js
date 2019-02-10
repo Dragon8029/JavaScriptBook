@@ -27,19 +27,7 @@
             removeErrorMessage(document.getElementById('bio')); // Remove error
         } // two more functions follow here (see p614-p617)
 
-        // DID IT PASS / CAN IT SUBMIT THE FORM?
-        // Loop through valid object, if ther are errors set isFormValid to false
-        for (var field in valid) { // Check properties of the valid object
-            if (!valid[field]) { // If it is not valid
-                isFormValid = false; // Set isFormValid variable to false
-                break; // Stop the for loop, error was found
-            } // Otherwise
-            isFormValid = true; // The form is valid and OK to submit
-        }
-        // If the form did not validate, prevent it being submitted
-        if (!isFormValid) { // If isFormValid is not true
-            e.preventDefault(); // Prevent the form being submitted
-        }
+        
     }); // End event handler
     
     // Functions called above are here
@@ -145,5 +133,18 @@
         }
         return valid; // Return whether valid or not
     }
+    // DID IT PASS / CAN IT SUBMIT THE FORM?
+        // Loop through valid object, if ther are errors set isFormValid to false
+        for (var field in valid) { // Check properties of the valid object
+            if (!valid[field]) { // If it is not valid
+                isFormValid = false; // Set isFormValid variable to false
+                break; // Stop the for loop, error was found
+            } // Otherwise
+            isFormValid = true; // The form is valid and OK to submit
+        }
+        // If the form did not validate, prevent it being submitted
+        if (!isFormValid) { // If isFormValid is not true
+            e.preventDefault(); // Prevent the form being submitted
+        }
 
 }()); //End of IIFE
