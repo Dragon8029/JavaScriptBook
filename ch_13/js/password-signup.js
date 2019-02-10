@@ -24,7 +24,7 @@
             target.className = 'fail'; // Set class to fail
         }
     }
-    addEvent(password, 'focus', remvoeErrorHighlighter); 
+    addEvent(password, 'focus', removeErrorHighlighter); 
     addEvent(password, 'blur', setErrorHighlighter); 
     addEvent(passwordConfirm, 'focus', removeErrorHighlighter); 
     addEvent(passwordConfirm, 'blur', passwordsMatch);
