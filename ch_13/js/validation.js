@@ -79,6 +79,52 @@
         return !el.value || el.value === el.placeholder;
     }
 
+    function validateTypes(el) {
+        if (!el.value) return true; // If element has no value, return true
+        // Otherwise get the value from .data()
+        var type = $(el).data('type') || el.getAttribute('type'); // or get the type of input
+        if (typeof validateType[type] === 'function') { // Is type a method of validate object? 
+            return validateType[type](el); // If yes, check if the value validates
+        } else { // If not
+            return true; // Return true as it cannot be tested
+        }
+    }
+
+    function validateParentsConsent() {
+        var parentsConsent = document.getElementById('parents-consent'); 
+        var consentContainer = document.getElementById('consent-container');
+        var valid = true; // Variable: valid set to true
+        if (consentContainer.className.indexOf('hide') === -1) { // If checkbox    shown
+            valid = parentsConsent.checked; // Update valid: is it checked/not
+            if (!valid) { // If not, set the error message
+                setErrorMessage(parentsConsent, 'You need your parents\' consent'); 
+            }
+        }
+        return valid; // Return whether valid or not
+    }
+
+    function validateBio() {
+        var bio = dcoument.getElementById('bio'); // Store ref to bio text area
+        var valid = bio.value.length <= 140; // Is bio <= 140 characters
+        if (!valid) { // If not, set an error message
+            setErrorMessage(bio, 'Your bio should not exceed 140 characters'); 
+        }
+        return valid; // Return Boolean value
+    }
+
+    function validatePassword() { 
+        var password = document.getElementById('password'); // Store ref to element
+        var valid = password.value.length >= 8; // Is its value >= 8 chars
+        if (!valid) { // If not, set error msg
+            setErrorMessage(password, 'Password must be at least 8 characters'); 
+        }
+        return valid; // Return true / false
+    }
+
+
+
+
+
     function setErrorMessage(el, message) {
         $(el).data('errorMessage', message); // Store error message with element
     }
@@ -94,16 +140,7 @@
         $errorContainer.text($(el).data('errorMessage')); // Add error message
     }
 
-    function validateTypes(el) {
-        if (!el.value) return true; // If element has no value, return true
-        // Otherwise get the value from .data()
-        var type = $(el).data('type') || el.getAttribute('type'); // or get the type of input
-        if (typeof validateType[type] === 'function') { // Is type a method of validate object? 
-            return validateType[type](el); // If yes, check if the value validates
-        } else { // If not
-            return true; // Return true as it cannot be tested
-        }
-    }
+    
 
     var validateType = {
         email: function(el) {
@@ -132,36 +169,11 @@
         }
     }
 
-    function validateBio() {
-        var bio = dcoument.getElementById('bio'); // Store ref to bio text area
-        var valid = bio.value.length <= 140; // Is bio <= 140 characters
-        if (!valid) { // If not, set an error message
-            setErrorMessage(bio, 'Your bio should not exceed 140 characters'); 
-        }
-        return valid; // Return Boolean value
-    }
+    
 
-    function validatePassword() { 
-        var password = document.getElementById('password'); // Store ref to element
-        var valid = password.value.length >= 8; // Is its value >= 8 chars
-        if (!valid) { // If not, set error msg
-            setErrorMessage(password, 'Password must be at least 8 characters'); 
-        }
-        return valid; // Return true / false
-    }
+    
 
-    function validateParentsConsent() {
-        var parentsConsent = document.getElementById('parents-consent'); 
-        var consentContainer = document.getElementById('consent-container');
-        var valid = true; // Variable: valid set to true
-        if (consentContainer.className.indexOf('hide') === -1) { // If checkbox    shown
-            valid = parentsConsent.checked; // Update valid: is it checked/not
-            if (!valid) { // If not, set the error message
-                setErrorMessage(parentsConsent, 'You need your parents\' consent'); 
-            }
-        }
-        return valid; // Return whether valid or not
-    }
+    
     
 
 }()); //End of IIFE
