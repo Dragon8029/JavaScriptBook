@@ -10,3 +10,16 @@ function addEvent(el, event, callback) {
         el.attachEvent('on' + event, el[event + callback]); // Use attachEvent()
     } // to call the second function, which then calls the first one
 }
+
+// Helper function to remove an event listener
+function removeEvent(el, event, callback) {
+    if ('removeEventListener' in el) {
+        // If removeEventListener works
+        el.removeEventListener(evetn, callback, false); // Use it
+    } else { 
+        // Otherwise
+        el.detachEvent('on' + event, el [event + callback]); // Create IE fallback
+        el[event + callback] = null; 
+        el['e' + event + callback] = null; 
+    }
+}
