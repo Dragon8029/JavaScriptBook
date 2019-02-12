@@ -5,7 +5,7 @@
     }
 
     var length = document.forms.length; // Get number of forms
-    for (var i = 0, l = length; i < l; i++ ) { // Loop through each one
+    for (var i = 0; i < length; i++ ) { // Loop through each one
         showPlaceholder(document.forms[i].elements); // Call showPlaceholder()
     }
 
