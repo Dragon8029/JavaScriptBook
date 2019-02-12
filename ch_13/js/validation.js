@@ -33,7 +33,7 @@
             showErrorMessage(document.getElementById('password')); // Show error message
             valid.password = false; // Update the valid object - this element is not valid
         } else { // Otherwise remove error message
-            removeErrorMessage(docuement.getElementById('password'));
+            removeErrorMessage(document.getElementById('password'));
         }
 
         // Parental consent (you could cache parent-consent in variable here)
