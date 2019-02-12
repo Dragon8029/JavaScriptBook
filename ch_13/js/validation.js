@@ -9,7 +9,7 @@
 
         // PERFORM GENERIC CHECKS (calls functions outside the event handler)
         var i;
-        for (i = 0, l = (elements.length - l); i < l; i++) {
+        for (i = 0, l = elements.length ; i < l; i++) {
             // Next line calls validateRequired() see p606 & validateTypes() p610
             isValid = validateRequired(elements[i]) && validateTypes(elements[i]);
             if (!isValid) { // If it does not pass these two tests
