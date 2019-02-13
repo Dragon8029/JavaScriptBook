@@ -105,7 +105,7 @@
     }
 
     function validateBio() {
-        var bio = dcoument.getElementById('bio'); // Store ref to bio text area
+        var bio = document.getElementById('bio'); // Store ref to bio text area
         var valid = bio.value.length <= 140; // Is bio <= 140 characters
         if (!valid) { // If not, set an error message
             setErrorMessage(bio, 'Your bio should not exceed 140 characters'); 
