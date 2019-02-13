@@ -173,7 +173,7 @@
             } 
             return valid;
         }
-    }
+    };
 
     
 
